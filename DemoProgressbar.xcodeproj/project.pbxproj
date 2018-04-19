@@ -14,12 +14,9 @@
 		7EBB86EC2088810D00EEA63E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EBB86EA2088810D00EEA63E /* LaunchScreen.storyboard */; };
 		7EBB86EF2088810D00EEA63E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86EE2088810D00EEA63E /* main.m */; };
 		7EBB86F7208896A600EEA63E /* CircularLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86F6208896A600EEA63E /* CircularLoaderView.m */; };
-		EC9D41C8ECDAF9227E140500 /* libPods-DemoProgressbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E197271453AEC98E43FC1A /* libPods-DemoProgressbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10C6ABA64E6985B1BB09715D /* Pods-DemoProgressbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoProgressbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar.release.xcconfig"; sourceTree = "<group>"; };
-		720083FA99C84944F05E18BC /* Pods-DemoProgressbar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoProgressbar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar.debug.xcconfig"; sourceTree = "<group>"; };
 		7EBB86DC2088810D00EEA63E /* DemoProgressbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProgressbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBB86DF2088810D00EEA63E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7EBB86E02088810D00EEA63E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -32,7 +29,6 @@
 		7EBB86EE2088810D00EEA63E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7EBB86F5208896A600EEA63E /* CircularLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircularLoaderView.h; sourceTree = "<group>"; };
 		7EBB86F6208896A600EEA63E /* CircularLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircularLoaderView.m; sourceTree = "<group>"; };
-		98E197271453AEC98E43FC1A /* libPods-DemoProgressbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemoProgressbar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,28 +36,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC9D41C8ECDAF9227E140500 /* libPods-DemoProgressbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6D9AF766F96286999200FB7E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				98E197271453AEC98E43FC1A /* libPods-DemoProgressbar.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		7EBB86D32088810D00EEA63E = {
 			isa = PBXGroup;
 			children = (
 				7EBB86DE2088810D00EEA63E /* DemoProgressbar */,
 				7EBB86DD2088810D00EEA63E /* Products */,
-				F7A083A2AE6BFFAB42F220AA /* Pods */,
-				6D9AF766F96286999200FB7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,15 +76,6 @@
 			path = DemoProgressbar;
 			sourceTree = "<group>";
 		};
-		F7A083A2AE6BFFAB42F220AA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				720083FA99C84944F05E18BC /* Pods-DemoProgressbar.debug.xcconfig */,
-				10C6ABA64E6985B1BB09715D /* Pods-DemoProgressbar.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,11 +83,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EBB86F22088810D00EEA63E /* Build configuration list for PBXNativeTarget "DemoProgressbar" */;
 			buildPhases = (
-				DACDDFED4F90479886D83B76 /* [CP] Check Pods Manifest.lock */,
 				7EBB86D82088810D00EEA63E /* Sources */,
 				7EBB86D92088810D00EEA63E /* Frameworks */,
 				7EBB86DA2088810D00EEA63E /* Resources */,
-				15DB8487E6417935AC9AB06C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,47 +141,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		15DB8487E6417935AC9AB06C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/DownloadButton/DownloadButton.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar/MBCircularProgressBar.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DownloadButton.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MBCircularProgressBar.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DACDDFED4F90479886D83B76 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DemoProgressbar-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EBB86D82088810D00EEA63E /* Sources */ = {
@@ -349,7 +282,6 @@
 		};
 		7EBB86F32088810D00EEA63E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 720083FA99C84944F05E18BC /* Pods-DemoProgressbar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -363,7 +295,6 @@
 		};
 		7EBB86F42088810D00EEA63E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10C6ABA64E6985B1BB09715D /* Pods-DemoProgressbar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

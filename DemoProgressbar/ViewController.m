@@ -7,59 +7,36 @@
 //
 
 #import "ViewController.h"
-#import <DownloadButton/PKDownloadButton.h>
-
 #import "CircularLoaderView.h"
 
-@interface ViewController () <NSURLSessionDownloadDelegate> {
-    CAShapeLayer* shapeLayer;
+@interface ViewController () <NSURLSessionDownloadDelegate, CircularLoaderViewDelegate> {
     NSURLSessionTask *task;
     NSURLSession *session;
-    CircularLoaderView *circularLoaderView;
+    NSURLRequest *request;
 }
+@property (weak, nonatomic) IBOutlet CircularLoaderView *circularLoadView_;
 
 @end
 
 @implementation ViewController
 
-- (IBAction)reset:(id)sender {
-    circularLoaderView.circleRadius = 0;
-    [task cancel];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    NSString *str = @"http://ipv4.download.thinkbroadband.com/20MB.zip";
+    NSString *str = @"http://ipv4.download.thinkbroadband.com/5MB.zip";
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    request = [NSURLRequest requestWithURL:url];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
     session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     task = [session downloadTaskWithRequest:request];
-    [task resume];
-    [self.view addSubview:circularLoaderView];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    circularLoaderView = [[CircularLoaderView alloc] initWithFrame:CGRectMake(100, 200, 30, 30)];
-    
-    UIGraphicsBeginImageContext(circularLoaderView.bounds.size);
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"icFileDownload"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    circularLoaderView.backgroundColor = [[UIColor alloc] initWithPatternImage:image];
+    self.circularLoadView_.delegate = self;
 }
-
-- (IBAction)buttonTapped:(id)sender {
-    [task resume];
-}
-
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location {
@@ -73,9 +50,18 @@ didFinishDownloadingToURL:(NSURL *)location {
     
     float progess = (float)totalBytesWritten / totalBytesExpectedToWrite;
         NSLog(@"progress: %f", progess);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            circularLoaderView.circleRadius = progess;
-        });
+        self.circularLoadView_.circleRadius = progess;
+}
+
+- (void)circularLoaderViewDidPressStart:(CircularLoaderView *)circularLoaderView {
+    if (task.state != NSURLSessionTaskStateRunning) {
+        task = [session downloadTaskWithRequest:request];
+    }
+    [task resume];
+}
+
+- (void)circularLoaderViewDidPressCancel:(CircularLoaderView *)circularLoaderView {
+    [task suspend];
 }
 
 @end

@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class CircularLoaderView;
+@protocol CircularLoaderViewDelegate <NSObject>
+
+- (void)circularLoaderViewDidPressStart:(CircularLoaderView *)circularLoaderView;
+- (void)circularLoaderViewDidPressCancel:(CircularLoaderView *)circularLoaderView;
+
+@end
+
 @interface CircularLoaderView : UIView
 
 @property (nonatomic, assign) CGFloat  circleRadius;
+
+@property (nonatomic, weak) id<CircularLoaderViewDelegate> delegate;
+
+- (void)startDownload;
+- (void)stopDownload;
 
 @end

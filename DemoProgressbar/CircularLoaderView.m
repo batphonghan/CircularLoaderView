@@ -8,79 +8,161 @@
 
 #import "CircularLoaderView.h"
 
-@interface CircularLoaderView ()
+typedef enum : NSUInteger {
+    notDowloaded,
+    dowloading,
+    canceled,
+    dowloaded
+} DownloadStatus;
 
+
+static void * kCircleRadiusContext = &kCircleRadiusContext;
+static NSString * kCircleRadius    = @"circleRadius";
+
+@interface CircularLoaderView ()
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
+@property (nonatomic, assign) DownloadStatus status;
 
 @end
 
 @implementation CircularLoaderView
 
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
         self.opaque = NO;
+        [self configure];
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)rect {
-    
-    [self configure];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.opaque = NO;
+        [self configure];
+    }
+    return self;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.opaque = NO;
+        [self configure];
+    }
+    return self;
 }
 
 - (void)dealloc {
-    [self removeObserver:self forKeyPath:@"circleRadius"];
+    [self removeObserver:self forKeyPath:kCircleRadius];
+}
+
+- (CGRect) imageRect{
+    return CGRectMake(self.bounds.origin.x,
+                      self.bounds.origin.y,
+                      self.bounds.size.width * 2 / 3,
+                      self.bounds.size.width * 2 / 3);
 }
 
 - (void)configure {
+    
+    self.status = notDowloaded;
     self.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     
     self.shapeLayer = [[CAShapeLayer alloc] init];
     self.shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+    self.shapeLayer.frame = CGRectInset([self imageRect], 3.0f, 3.0f);
     
-    self.shapeLayer.frame = CGRectInset(self.bounds, 3.0f, 3.0f);
-    self.shapeLayer.path = [[UIBezierPath bezierPathWithOvalInRect:self.shapeLayer.bounds] CGPath];
+    self.shapeLayer.path = [[UIBezierPath bezierPathWithOvalInRect:self.shapeLayer.bounds ] CGPath];
     self.shapeLayer.lineWidth = 2;
     self.shapeLayer.strokeColor = [[UIColor whiteColor] CGColor];
     self.shapeLayer.strokeStart = 0;
     self.shapeLayer.strokeEnd = 0;
     
-    
     [self.layer addSublayer:self.shapeLayer];
     
-    UIImage *backgroundImage = [UIImage imageNamed:@"icFileDownload"];
     
-    UIGraphicsBeginImageContext(self.bounds.size);
-    CGRect imagePosition = CGRectMake((self.bounds.size.width / 2)  - (backgroundImage.size.width / 2),
-                                      (self.bounds.size.height / 2) - (backgroundImage.size.height / 2),
-                                      backgroundImage.size.width,
-                                      backgroundImage.size.height);
     
-    [backgroundImage drawInRect:imagePosition];
+    UIGraphicsBeginImageContext(self.frame.size);
+    [[UIImage imageNamed:@"icVoiceDownload"] drawInRect:[self imageRect]];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
+    self.backgroundColor = [UIColor colorWithPatternImage:image];
     
-    self.backgroundColor = [[UIColor alloc] initWithPatternImage:image];
     
-    [self addObserver:self forKeyPath:@"circleRadius" options:NSKeyValueObservingOptionNew context:nil];
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self addGestureRecognizer:singleFingerTap];
+    singleFingerTap.numberOfTapsRequired = 1;
+    
+    [self addObserver:self forKeyPath:kCircleRadius
+              options:NSKeyValueObservingOptionNew context:kCircleRadiusContext];
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"circleRadius"]) {
-        self.shapeLayer.strokeEnd = self.circleRadius;
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    switch (self.status) {
+        case notDowloaded:
+            [self startDownload];
+            self.status = dowloading;
+            break;
+        case dowloading:
+            [self stopDownload];
+            self.status = canceled;
+            break;
+        case canceled:
+            [self startDownload];
+            self.status = dowloading;
+        case dowloaded:
+            [self startDownload];
+            self.status = dowloading;
+        default:
+            break;
     }
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.shapeLayer.frame = self.bounds;
+- (void)startDownload {
+    UIGraphicsBeginImageContext(self.frame.size);
+    [[UIImage imageNamed:@"icVoiceCancel"] drawInRect:[self imageRect]];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.backgroundColor = [UIColor colorWithPatternImage:image];
+    
+    [self.delegate circularLoaderViewDidPressStart:self];
+}
+
+- (void)stopDownload {
+    UIGraphicsBeginImageContext(self.frame.size);
+    [[UIImage imageNamed:@"icVoiceDownload"] drawInRect:[self imageRect]];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.backgroundColor = [UIColor colorWithPatternImage:image];
+    [self.delegate circularLoaderViewDidPressCancel:self];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    self.shapeLayer.actions = @{@"strokeEnd": [NSNull null]};
+    self.shapeLayer.strokeEnd = 0;
+    [CATransaction commit];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context {
+    if (context != kCircleRadiusContext) return;
+    
+    if ([keyPath isEqualToString:kCircleRadius]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.shapeLayer.strokeEnd = self.circleRadius;
+            if (self.circleRadius >= 1.0) {
+                self.status = dowloaded;
+                [self stopDownload];
+            }
+        });
+    }
 }
 
 @end
+
+
