@@ -8,27 +8,19 @@
 
 #import "CircularLoaderView.h"
 
-typedef enum : NSUInteger {
-    notDowloaded,
-    dowloading,
-    canceled,
-    dowloaded
-} DownloadStatus;
 
 
 static void * kCircleRadiusContext = &kCircleRadiusContext;
 static NSString * kCircleRadius    = @"circleRadius";
 
 @interface CircularLoaderView ()
+
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 @property (nonatomic, assign) DownloadStatus status;
-
 @property (nonatomic, strong) UIImage *downloadImage;
 @property (nonatomic, strong) UIImage *stopImage;
 
 @end
-
-
 
 @implementation CircularLoaderView
 
@@ -68,6 +60,7 @@ static NSString * kCircleRadius    = @"circleRadius";
     
     return _downloadImage;
 }
+
 - (UIImage *)stopImage {
     if (!_stopImage) {
         _stopImage = [UIImage imageNamed:@"icVoiceCancel"];
@@ -82,7 +75,7 @@ static NSString * kCircleRadius    = @"circleRadius";
 
 - (void)configure {
     self.status = notDowloaded;
-    self.layer.backgroundColor = [[UIColor whiteColor] CGColor];
+    self.layer.backgroundColor = [[UIColor clearColor] CGColor];
     
     [self p_customDraw];
     [self p_addGesture];
@@ -109,13 +102,13 @@ static NSString * kCircleRadius    = @"circleRadius";
     self.shapeLayer = [[CAShapeLayer alloc] init];
     self.shapeLayer.fillColor = [[UIColor clearColor] CGColor];
     self.shapeLayer.frame = CGRectInset(self.bounds, 5.0f, 5.0f);
-
+    
     self.shapeLayer.path = [[UIBezierPath bezierPathWithOvalInRect:self.shapeLayer.bounds ] CGPath];
     self.shapeLayer.lineWidth = 2;
     self.shapeLayer.strokeColor = [[UIColor whiteColor] CGColor];
     self.shapeLayer.strokeStart = 0;
     self.shapeLayer.strokeEnd = 0;
-
+    
     [self.layer addSublayer:self.shapeLayer];
 }
 
@@ -125,16 +118,20 @@ static NSString * kCircleRadius    = @"circleRadius";
         case notDowloaded:
             [self startDownload];
             self.status = dowloading;
+            [self.delegate circularLoaderViewDidPressStart:self];
             break;
         case dowloading:
             [self stopDownload];
+            [self.delegate circularLoaderViewDidPressCancel:self];
             self.status = canceled;
             break;
         case canceled:
             [self startDownload];
+            [self.delegate circularLoaderViewDidPressStart:self];
             self.status = dowloading;
         case dowloaded:
             [self startDownload];
+            [self.delegate circularLoaderViewDidPressStart:self];
             self.status = dowloading;
         default:
             break;
@@ -150,12 +147,9 @@ static NSString * kCircleRadius    = @"circleRadius";
 
 - (void)startDownload {
     self.image = self.stopImage;
-    [self.delegate circularLoaderViewDidPressStart:self];
 }
 
 - (void)stopDownload {
-    [self.delegate circularLoaderViewDidPressCancel:self];
-    
     
     self.image = self.downloadImage;
     [CATransaction begin];
@@ -164,59 +158,20 @@ static NSString * kCircleRadius    = @"circleRadius";
     [CATransaction commit];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context {
     if (context != kCircleRadiusContext) return;
     
     if ([keyPath isEqualToString:kCircleRadius]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.shapeLayer.strokeEnd = self.circleRadius;
+            
+            if (self.circleRadius >= 1.0) {
+                [self doneDownload];
+            }
         });
     }
 }
 
-
-//
-//- (void)p_drawDownloadIcon {
-//    CAShapeLayer *downloadIcon = [CAShapeLayer new];
-////    downloadIcon.fillColor = [[UIColor whiteColor] CGColor];
-//    downloadIcon.lineWidth = 2;
-//    downloadIcon.strokeColor = [[UIColor whiteColor] CGColor];
-//
-////    CGRect rect = self.bounds;
-//    CGSize size = self.bounds.size;
-//    CGPoint origin = self.bounds.origin;
-//    CGFloat inset = size.height / 7;
-//
-//    CGPoint start = CGPointMake(origin.x + size.width / 2, origin.y + inset);
-//    CGPoint end = CGPointMake(origin.x + size.height / 2, origin.y + size.height - inset);
-//    CGPoint left = CGPointMake(origin.x + inset, size.height / 2);
-////    CGPoint right = CGPointMake(origin.x + size.width - inset, size.height / 2);
-//
-//
-//    UIBezierPath *downloadPath = [UIBezierPath new];
-//    [downloadPath moveToPoint:start];
-//    [downloadPath addLineToPoint:end];
-//    [downloadPath addLineToPoint:left];
-////    [downloadPath fill];
-//
-//    [downloadPath moveToPoint:end];
-////    [downloadPath addLineToPoint:right];
-//
-//    [downloadPath stroke];
-//    downloadIcon.path = downloadPath.CGPath;
-//
-//    [self.layer addSublayer:downloadIcon];
-//}
-
-//- (void)p_drawCircle {
-//    CAShapeLayer *circle = [[CAShapeLayer alloc] init];
-//    circle.fillColor = [[UIColor blueColor] CGColor];
-//    circle.frame = self.bounds;
-//    circle.path = [[UIBezierPath bezierPathWithOvalInRect:CGRectInset(self.bounds, 2.0f, 2.0f)] CGPath];
-//    circle.strokeColor = [[UIColor blueColor] CGColor];
-//    [self.layer insertSublayer:circle below: _shapeLayer] ;
-//}
 @end
-
-

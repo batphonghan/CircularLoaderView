@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    notDowloaded,
+    dowloading,
+    canceled,
+    dowloaded
+} DownloadStatus;
+
 
 @class CircularLoaderView;
 @protocol CircularLoaderViewDelegate <NSObject>
@@ -22,6 +29,8 @@
 @property (nonatomic, assign) CGFloat  circleRadius;
 
 @property (nonatomic, weak) id<CircularLoaderViewDelegate> delegate;
+
+- (void)configure;
 
 - (void)startDownload;
 - (void)stopDownload;

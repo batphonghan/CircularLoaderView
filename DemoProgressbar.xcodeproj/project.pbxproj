@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3AF7B9CBB30FD0605ABF3B67 /* libPods-DemoProgressbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4DC1BCDCE355D2A940B8D1 /* libPods-DemoProgressbar.a */; };
+		71C967D2208C6037003B3649 /* HNOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C967D1208C6037003B3649 /* HNOperation.m */; };
+		71C967D5208C6F74003B3649 /* DownloadViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C967D4208C6F74003B3649 /* DownloadViewCell.m */; };
+		71C967DC208C707E003B3649 /* NSURLSession+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C967DB208C707E003B3649 /* NSURLSession+RACSupport.m */; };
+		71C967E0208C7326003B3649 /* DownloadCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C967DF208C7326003B3649 /* DownloadCellViewModel.m */; };
 		71EDDB18208C408D003D1A3A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 71EDDB17208C408D003D1A3A /* Podfile */; };
 		7EBB86E12088810D00EEA63E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86E02088810D00EEA63E /* AppDelegate.m */; };
 		7EBB86E42088810D00EEA63E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86E32088810D00EEA63E /* ViewController.m */; };
@@ -20,6 +24,14 @@
 
 /* Begin PBXFileReference section */
 		4AB7F8D04B823656DB03B03F /* Pods-DemoProgressbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoProgressbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar.release.xcconfig"; sourceTree = "<group>"; };
+		71C967D0208C6037003B3649 /* HNOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HNOperation.h; sourceTree = "<group>"; };
+		71C967D1208C6037003B3649 /* HNOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HNOperation.m; sourceTree = "<group>"; };
+		71C967D3208C6F74003B3649 /* DownloadViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadViewCell.h; sourceTree = "<group>"; };
+		71C967D4208C6F74003B3649 /* DownloadViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadViewCell.m; sourceTree = "<group>"; };
+		71C967DA208C707E003B3649 /* NSURLSession+RACSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+RACSupport.h"; sourceTree = "<group>"; };
+		71C967DB208C707E003B3649 /* NSURLSession+RACSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+RACSupport.m"; sourceTree = "<group>"; };
+		71C967DE208C7326003B3649 /* DownloadCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadCellViewModel.h; sourceTree = "<group>"; };
+		71C967DF208C7326003B3649 /* DownloadCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadCellViewModel.m; sourceTree = "<group>"; };
 		71EDDB17208C408D003D1A3A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		7EBB86DC2088810D00EEA63E /* DemoProgressbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProgressbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBB86DF2088810D00EEA63E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,6 +69,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		71C967D6208C7019003B3649 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				71C967DE208C7326003B3649 /* DownloadCellViewModel.h */,
+				71C967DF208C7326003B3649 /* DownloadCellViewModel.m */,
+				71C967D3208C6F74003B3649 /* DownloadViewCell.h */,
+				71C967D4208C6F74003B3649 /* DownloadViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		71C967D7208C7021003B3649 /* ProcessView */ = {
+			isa = PBXGroup;
+			children = (
+				7EBB86F5208896A600EEA63E /* CircularLoaderView.h */,
+				7EBB86F6208896A600EEA63E /* CircularLoaderView.m */,
+			);
+			path = ProcessView;
+			sourceTree = "<group>";
+		};
+		71C967D8208C702E003B3649 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				71C967D0208C6037003B3649 /* HNOperation.h */,
+				71C967D1208C6037003B3649 /* HNOperation.m */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
+		71C967D9208C7044003B3649 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EBB86E22088810D00EEA63E /* ViewController.h */,
+				7EBB86E32088810D00EEA63E /* ViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		71C967DD208C71EA003B3649 /* NSURLSession+RAC */ = {
+			isa = PBXGroup;
+			children = (
+				71C967DA208C707E003B3649 /* NSURLSession+RACSupport.h */,
+				71C967DB208C707E003B3649 /* NSURLSession+RACSupport.m */,
+			);
+			path = "NSURLSession+RAC";
+			sourceTree = "<group>";
+		};
 		7EBB86D32088810D00EEA63E = {
 			isa = PBXGroup;
 			children = (
@@ -79,12 +138,13 @@
 		7EBB86DE2088810D00EEA63E /* DemoProgressbar */ = {
 			isa = PBXGroup;
 			children = (
-				7EBB86F5208896A600EEA63E /* CircularLoaderView.h */,
-				7EBB86F6208896A600EEA63E /* CircularLoaderView.m */,
+				71C967DD208C71EA003B3649 /* NSURLSession+RAC */,
+				71C967D6208C7019003B3649 /* Cell */,
+				71C967D7208C7021003B3649 /* ProcessView */,
+				71C967D8208C702E003B3649 /* Operation */,
 				7EBB86DF2088810D00EEA63E /* AppDelegate.h */,
 				7EBB86E02088810D00EEA63E /* AppDelegate.m */,
-				7EBB86E22088810D00EEA63E /* ViewController.h */,
-				7EBB86E32088810D00EEA63E /* ViewController.m */,
+				71C967D9208C7044003B3649 /* ViewController */,
 				7EBB86E52088810D00EEA63E /* Main.storyboard */,
 				7EBB86E82088810D00EEA63E /* Assets.xcassets */,
 				7EBB86EA2088810D00EEA63E /* LaunchScreen.storyboard */,
@@ -229,9 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C967D2208C6037003B3649 /* HNOperation.m in Sources */,
 				7EBB86E42088810D00EEA63E /* ViewController.m in Sources */,
+				71C967DC208C707E003B3649 /* NSURLSession+RACSupport.m in Sources */,
+				71C967D5208C6F74003B3649 /* DownloadViewCell.m in Sources */,
 				7EBB86EF2088810D00EEA63E /* main.m in Sources */,
 				7EBB86F7208896A600EEA63E /* CircularLoaderView.m in Sources */,
+				71C967E0208C7326003B3649 /* DownloadCellViewModel.m in Sources */,
 				7EBB86E12088810D00EEA63E /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
