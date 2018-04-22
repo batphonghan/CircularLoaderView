@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AF7B9CBB30FD0605ABF3B67 /* libPods-DemoProgressbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4DC1BCDCE355D2A940B8D1 /* libPods-DemoProgressbar.a */; };
+		71EDDB18208C408D003D1A3A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 71EDDB17208C408D003D1A3A /* Podfile */; };
 		7EBB86E12088810D00EEA63E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86E02088810D00EEA63E /* AppDelegate.m */; };
 		7EBB86E42088810D00EEA63E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB86E32088810D00EEA63E /* ViewController.m */; };
 		7EBB86E72088810D00EEA63E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EBB86E52088810D00EEA63E /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AB7F8D04B823656DB03B03F /* Pods-DemoProgressbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoProgressbar.release.xcconfig"; path = "Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar.release.xcconfig"; sourceTree = "<group>"; };
+		71EDDB17208C408D003D1A3A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		7EBB86DC2088810D00EEA63E /* DemoProgressbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProgressbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBB86DF2088810D00EEA63E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7EBB86E02088810D00EEA63E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +33,8 @@
 		7EBB86EE2088810D00EEA63E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7EBB86F5208896A600EEA63E /* CircularLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircularLoaderView.h; sourceTree = "<group>"; };
 		7EBB86F6208896A600EEA63E /* CircularLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircularLoaderView.m; sourceTree = "<group>"; };
+		BE4DC1BCDCE355D2A940B8D1 /* libPods-DemoProgressbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemoProgressbar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF28DD3D07BFCE04BB896141 /* Pods-DemoProgressbar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoProgressbar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +42,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF7B9CBB30FD0605ABF3B67 /* libPods-DemoProgressbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62066AF1F54190B801ADB5D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE4DC1BCDCE355D2A940B8D1 /* libPods-DemoProgressbar.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7EBB86D32088810D00EEA63E = {
 			isa = PBXGroup;
 			children = (
 				7EBB86DE2088810D00EEA63E /* DemoProgressbar */,
+				71EDDB17208C408D003D1A3A /* Podfile */,
 				7EBB86DD2088810D00EEA63E /* Products */,
+				D0B4A7C912F8357EE9DAA374 /* Pods */,
+				62066AF1F54190B801ADB5D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +94,15 @@
 			path = DemoProgressbar;
 			sourceTree = "<group>";
 		};
+		D0B4A7C912F8357EE9DAA374 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF28DD3D07BFCE04BB896141 /* Pods-DemoProgressbar.debug.xcconfig */,
+				4AB7F8D04B823656DB03B03F /* Pods-DemoProgressbar.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EBB86F22088810D00EEA63E /* Build configuration list for PBXNativeTarget "DemoProgressbar" */;
 			buildPhases = (
+				D850F0726869E720DDA3BE94 /* [CP] Check Pods Manifest.lock */,
 				7EBB86D82088810D00EEA63E /* Sources */,
 				7EBB86D92088810D00EEA63E /* Frameworks */,
 				7EBB86DA2088810D00EEA63E /* Resources */,
+				5468ECD69AC6EDD0BC493DBA /* [CP] Embed Pods Frameworks */,
+				92E752EBE28A6C92FA612441 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,11 +166,63 @@
 			files = (
 				7EBB86EC2088810D00EEA63E /* LaunchScreen.storyboard in Resources */,
 				7EBB86E92088810D00EEA63E /* Assets.xcassets in Resources */,
+				71EDDB18208C408D003D1A3A /* Podfile in Resources */,
 				7EBB86E72088810D00EEA63E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5468ECD69AC6EDD0BC493DBA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92E752EBE28A6C92FA612441 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DemoProgressbar/Pods-DemoProgressbar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D850F0726869E720DDA3BE94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DemoProgressbar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EBB86D82088810D00EEA63E /* Sources */ = {
@@ -282,10 +364,13 @@
 		};
 		7EBB86F32088810D00EEA63E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28DD3D07BFCE04BB896141 /* Pods-DemoProgressbar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 462693YXF2;
 				INFOPLIST_FILE = DemoProgressbar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dasdsadasd.DemoProgressbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,10 +380,13 @@
 		};
 		7EBB86F42088810D00EEA63E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AB7F8D04B823656DB03B03F /* Pods-DemoProgressbar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 462693YXF2;
 				INFOPLIST_FILE = DemoProgressbar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dasdsadasd.DemoProgressbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";

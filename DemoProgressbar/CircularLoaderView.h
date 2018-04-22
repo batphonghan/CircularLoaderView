@@ -17,7 +17,7 @@
 
 @end
 
-@interface CircularLoaderView : UIView
+@interface CircularLoaderView : UIImageView
 
 @property (nonatomic, assign) CGFloat  circleRadius;
 
@@ -25,5 +25,6 @@
 
 - (void)startDownload;
 - (void)stopDownload;
+- (void)doneDownload;
 
 @end

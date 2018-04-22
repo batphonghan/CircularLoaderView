@@ -29,18 +29,12 @@
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     task = [session downloadTaskWithRequest:request];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     self.circularLoadView_.delegate = self;
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
-didFinishDownloadingToURL:(NSURL *)location {
-    
+                              didFinishDownloadingToURL:(NSURL *)location {
+    [self.circularLoadView_ doneDownload];
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -56,8 +50,8 @@ didFinishDownloadingToURL:(NSURL *)location {
 - (void)circularLoaderViewDidPressStart:(CircularLoaderView *)circularLoaderView {
     if (task.state != NSURLSessionTaskStateRunning) {
         task = [session downloadTaskWithRequest:request];
+        [task resume];
     }
-    [task resume];
 }
 
 - (void)circularLoaderViewDidPressCancel:(CircularLoaderView *)circularLoaderView {
